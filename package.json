@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/aleenaalexia/Employee-Tracker/issues"
   },
-  "homepage": "https://github.com/aleenaalexia/Employee-Tracker#readme"
+  "homepage": "https://github.com/aleenaalexia/Employee-Tracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.4",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3"
+  }
 }
