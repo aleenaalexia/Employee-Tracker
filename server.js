@@ -199,6 +199,52 @@ const userPrompts = () => {
         })
     };
 
+    // add new role function
+    addRole = () => {
+        inquirer.prompt([
+            {
+                type: 'input', 
+                name: 'role',
+                message: 'What role would you like to add?'
+            },
+            {
+                type: 'input',
+                name: 'salary',
+                message: 'What is the salary for this role?'
+            }
+        ])
+        .then(answer => {
+            const params = [answer.role, answer.salary];
+
+            connection.query(`SELECT department_name, id FROM department`, (err, data) => {
+                if (err) throw err;
+
+                const department = data.map(({ department_name, id }) => ({ name: department_name, value: id}));
+
+                inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'department',
+                        message: 'Which department is this role in?',
+                        choices: department
+                    }
+                ])
+                .then(userChoice => {
+                    const department = userChoice.department;
+                    params.push(department);
+
+                    connection.query(`INSERT INTO employee_role (title, salary, department_id)
+                    VALUES (?, ?, ?)`, params, (err, result) => {
+                        if (err) throw err;
+                        console.log('Successfully added new role!');
+
+                        viewRoles();
+                    });
+                });
+            });
+        });
+    };
+
     // add new department function
     addDepartment = () => {
         inquirer.prompt([
@@ -216,5 +262,3 @@ const userPrompts = () => {
             });
         });
     };
-
-    // add new role
