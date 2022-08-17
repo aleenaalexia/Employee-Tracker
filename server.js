@@ -188,6 +188,17 @@ const userPrompts = () => {
         });
     };
 
+    // view all roles function
+    viewRoles = () => {
+        connection.query(`SELECT employee_role.id, employee_role.title, department.department_name AS department
+        FROM employee_role
+        INNER JOIN department ON employee_role.department_id = department.id`, (err, rows) => {
+            if (err) throw err;
+            console.table(rows);
+            userPrompts();
+        })
+    };
+
     // add new department function
     addDepartment = () => {
         inquirer.prompt([
