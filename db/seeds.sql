@@ -1,8 +1,8 @@
-INSERT INTO department (department_name)
-VALUES ("Sales"),
-       ("Engineering"),
-       ("Finance"),
-       ("Legal");
+-- INSERT INTO department (department_name)
+-- VALUES ("Sales"),
+--        ("Engineering"),
+--        ("Finance"),
+--        ("Legal");
 
 INSERT INTO employee_role (title, salary, department_id)
 VALUES ('Chef', 100000, 1),
@@ -15,8 +15,8 @@ VALUES ('Chef', 100000, 1),
        ('Manager', 200000, 2);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ('Aleena', 'Johns', 1 ),
-       ('Jonathan', 'Doe', 3, 1),
-       ('Tammy, Shaw', 8 );
+VALUES ('Aleena', 'Johns', 1, 3),
+       ('Jonathan', 'Doe', 3, 3),
+       ('Tammy', 'Shaw', 8, 3);
 
        SELECT * FROM department ORDER BY id,department_name;

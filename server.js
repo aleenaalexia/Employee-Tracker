@@ -2,6 +2,7 @@ const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 
+
 // connecting database
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -29,26 +30,57 @@ prompts();
 
 // lists all user options
 const userPrompts = () => {
-    return inquirer.prompt([
+     inquirer.prompt([
         {
             type: 'list',
-            name: 'What would you like to do?',
+            name: 'choices',
             message: 'What would you like to do?',
-            choices: ['View All Employees', 'Add Employee', 'Upddate Employee Role', 'View All Roles', 
+            choices: ['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 
                       'Add Role', 'View All Departments', 'Add Department', 'Quit']
         }])
-        .then((answers) => {
-            const { choices } = answers;
-            
-            if (choices === 'View All Employees') {
+        .then(answers => {
+            // const { choices } = answers;
+
+            // switch (answers) {
+            //     case 'View All Employees':
+            //         viewEmployees();
+            //         break;
+            //     case 'View All Departments':
+            //         viewDepartments();
+            //         break;
+            // }
+            console.log(answers);
+            if (answers.choices === "View All Employees") {
                 viewEmployees();
             }
 
-            if (choices === 'Add Employee') {
-
+            if (answers.choices === "Add Employee") {
+                addEmployee();
             }
 
+            if (answers.choices === "Update Employee Role") {
+                updateEmployee();
+            }
 
+            if (answers.choices === 'View All Roles') {
+                viewRoles();
+            }
+
+            if (answers.choices === 'Add Role') {
+                addRole();
+            }
+
+            if (answers.choices === "View All Departments") {
+                viewDepartments();
+            }
+
+            if (answers.choices === 'Add Department') {
+                addDepartment();
+            }
+
+            if (answers.choices === 'Quit') {
+                connection.end();
+            };
         });
     };
 
@@ -127,6 +159,7 @@ const userPrompts = () => {
                                 console.log('Employee successfully added!')
 
                                 viewEmployees();
+                                userPrompts();
                             });
                         });
                     });
