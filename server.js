@@ -12,21 +12,6 @@ const connection = mysql.createConnection({
 });
 
 
-// initial prompt on server load
-const prompts = () => {
-    return inquirer.prompt([
-        {
-            type: 'list',
-            name: 'options',
-            message: 'What would you like to do?',
-            choices: ['View all departments.']
-        }])
-        .then(userChoice => {
- // displays department table           
-viewDepartments();
-        });
-}
-prompts();
 
 // lists all user options
 const userPrompts = () => {
@@ -39,17 +24,7 @@ const userPrompts = () => {
                       'Add Role', 'View All Departments', 'Add Department', 'Quit']
         }])
         .then(answers => {
-            // const { choices } = answers;
-
-            // switch (answers) {
-            //     case 'View All Employees':
-            //         viewEmployees();
-            //         break;
-            //     case 'View All Departments':
-            //         viewDepartments();
-            //         break;
-            // }
-            console.log(answers);
+         
             if (answers.choices === "View All Employees") {
                 viewEmployees();
             }
@@ -83,6 +58,7 @@ const userPrompts = () => {
             };
         });
     };
+userPrompts();
 
     // view all departments function
     viewDepartments = () => {

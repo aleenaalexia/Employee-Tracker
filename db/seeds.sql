@@ -20,3 +20,5 @@ VALUES ('Aleena', 'Johns', 1, 3),
        ('Tammy', 'Shaw', 8, 3);
 
        SELECT * FROM department ORDER BY id,department_name;
+
+       DELETE FROM `employee_role` WHERE `id` >=9 and id<=40;
