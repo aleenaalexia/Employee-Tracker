@@ -264,10 +264,10 @@ userPrompts();
             }
         ])
         .then(userChoice => {
-            connection.query(`INSERT INTO department (department_name) VALUES (?)`, answer.addDepartment, (err, result) => {
+            connection.query(`INSERT INTO department (department_name) VALUES (?)`, userChoice.addDepartment, (err, result) => {
                 if(err) throw err;
                 console.log('Successfully added ' + userChoice.addDepartment + ' to departments!');
-
+                userPrompts();
             });
         });
     };
